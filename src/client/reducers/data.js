@@ -11,14 +11,14 @@ const getDataAction = (state, action) => ({
 });
 const setDataAction = (state, action) => ({
     ...state,
-    data: state.data,
+    data: action.data,
     loading: false,
 });
 
 
 export default createReducer(
     {
-        entities: {},
+        data: null,
     },
     {
         [DATA_ACTIONS.GET_DATA]: getDataAction,

@@ -11,7 +11,8 @@ get '/' do
   'Hello world!'
 end
 
-get '/data' do
+get '/api/data' do
+    headers 'Access-Control-Allow-Origin' => 'http://localhost:3000'
     file = File.read('data.json')
     data_hash = JSON.parse(file)
     JSON data_hash['sports']

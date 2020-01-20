@@ -16,6 +16,7 @@ export const loadData = () => async dispatch => {
     try {
         const response = await DataApi.getData();
         const body = response.body;
+        // console.log(body);
 
         if (response.status === 200) {
             dispatch({

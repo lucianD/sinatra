@@ -24,6 +24,7 @@ const getClientEnvironment = require('./env');
 const ModuleNotFoundPlugin = require('react-dev-utils/ModuleNotFoundPlugin');
 const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpackPlugin');
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
+const root = path.resolve(__dirname, './src/client/');
 
 const postcssNormalize = require('postcss-normalize');
 
@@ -136,6 +137,8 @@ module.exports = function(webpackEnv) {
   };
 
   return {
+    context: root,
+
     mode: isEnvProduction ? 'production' : isEnvDevelopment && 'development',
     // Stop compilation early in production
     bail: isEnvProduction,
