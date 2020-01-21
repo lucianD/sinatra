@@ -8,5 +8,8 @@ export default {
     getData() {
         return api.get('/api/data');
     },
+    getSports() {
+        return api.get('/api/sports');
+    },
 
 };

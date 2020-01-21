@@ -14,7 +14,7 @@ export const loadData = () => async dispatch => {
         loading: true,
     });
     try {
-        const response = await DataApi.getData();
+        const response = await DataApi.getSports();
         const body = response.body;
         // console.log(body);
 
