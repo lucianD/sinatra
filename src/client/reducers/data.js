@@ -11,18 +11,24 @@ const getDataAction = (state, action) => ({
 });
 const setDataAction = (state, action) => ({
     ...state,
-    data: action.data,
+    sports: action.data,
     loading: false,
+});
+const setSportAction = (state, action) => ({
+    ...state,
+    selectedSport: action.selectedSport,
 });
 
 
 export default createReducer(
     {
-        data: null,
+        sports: null,
+        selectedSport: null,
     },
     {
         [DATA_ACTIONS.GET_DATA]: getDataAction,
         [DATA_ACTIONS.SET_DATA]: setDataAction,
         [DATA_ACTIONS.LOADING]: loadingAction,
+        [DATA_ACTIONS.SET_SPORT]: setSportAction,
     }
 );

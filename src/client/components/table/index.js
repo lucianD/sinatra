@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import './index.scss'
 
-function TableComponent({columns, data}) {
+function TableComponent({columns, data, onClickHandler}) {
 
         const tableHeaders = (
             <thead className='thead-dark'>
@@ -14,7 +14,7 @@ function TableComponent({columns, data}) {
         const tableBody = data.map(function(row) {
             return (
                 <tbody key={row.id}>
-                    <tr>
+                    <tr onClick={onClickHandler.bind(this, row.id)}>
                         {columns.map(function(column) {
                             return <td key={row[column]}>{row[column]}</td>; })}
                     </tr>

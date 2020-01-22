@@ -3,10 +3,16 @@ import DataApi from '../services/api/data';
 export const DATA_ACTIONS = {
     GET_DATA: 'basic.getData',
     SET_DATA: 'basic.setData',
+    SET_SPORT: 'basic.setSport',
     LOADING: 'basic.loading',
     SET_ERRORS: 'basic.setErrors',
 };
 
+
+export const setSport = selectedSport => ({
+    type: DATA_ACTIONS.SET_SPORT,
+    selectedSport
+});
 
 export const loadData = () => async dispatch => {
     dispatch({
@@ -16,7 +22,6 @@ export const loadData = () => async dispatch => {
     try {
         const response = await DataApi.getSports();
         const body = response.body;
-        // console.log(body);
 
         if (response.status === 200) {
             dispatch({

@@ -1,8 +1,8 @@
 /* eslint-disable max-lines-per-function */
 import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-// import { Redirect } from 'react-router-dom';
-import {loadData} from '../../actions/data'
+import { withRouter } from 'react-router-dom';
+import {loadData, setSport} from '../../actions/data'
 import Button from "../../components/button";
 import Table from "../../components/table";
 import './index.scss'
@@ -11,9 +11,9 @@ import './index.scss'
  * Home page component
  * @returns {React.Component}
  */
-function HomePage() {
+function HomePage( {history}) {
     const dispatch = useDispatch();
-    const json = useSelector(state => state.data);
+    const sports = useSelector(state => state.data.sports);
     const [isSportsVisible, setSportsVisibility] = useState(true);
 
     const renderShowHideButton = () => {
@@ -37,7 +37,15 @@ function HomePage() {
     const renderSportsTable = () => {
         return <div className='homepage__table-container'>
             <span className='homepage__table-container__title'>Listing all the sports below</span>
-            <Table className='homepage__table-container__content' columns={['id', 'desc']} data={json.data}></Table>
+            <Table
+                className='homepage__table-container__content'
+                columns={['id', 'desc']}
+                data={sports}
+                onClickHandler={selectedSport => {
+                    dispatch(setSport(selectedSport));
+                    history.push('/view-sport');
+                }}
+            />
         </div>;
     };
 
@@ -45,9 +53,9 @@ function HomePage() {
         <div className='homepage'>
             {renderLoadAllSportsButton()}
 
-            {json.data && renderShowHideButton()}
+            {sports && renderShowHideButton()}
 
-            {isSportsVisible && json.data && (
+            {isSportsVisible && sports && (
                 renderSportsTable()
             )
 
@@ -56,4 +64,4 @@ function HomePage() {
     );
 }
 
-export default HomePage;
+export default withRouter(HomePage);

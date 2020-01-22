@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import HomePage from './pages/home';
+import SportPage from './pages/sport';
 
 /**
  * Router component
@@ -12,6 +13,7 @@ function Routes() {
         <Router>
             <Switch>
                 <Route path="/" exact component={HomePage}/>
+                <Route path="/view-sport" exact component={SportPage}/>
 
                 {/*<Route path="/*" exact component={NotFound} />*/}
             </Switch>
