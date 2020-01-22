@@ -18,6 +18,10 @@ const setSportAction = (state, action) => ({
     ...state,
     selectedSport: action.selectedSport,
 });
+const setSportDataAction = (state, action) => ({
+    ...state,
+    selectedSportData: action.data,
+});
 
 
 export default createReducer(
@@ -30,5 +34,6 @@ export default createReducer(
         [DATA_ACTIONS.SET_DATA]: setDataAction,
         [DATA_ACTIONS.LOADING]: loadingAction,
         [DATA_ACTIONS.SET_SPORT]: setSportAction,
+        [DATA_ACTIONS.SET_SPORT_DATA]: setSportDataAction,
     }
 );

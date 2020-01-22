@@ -11,5 +11,8 @@ export default {
     getSports() {
         return api.get('/api/sports');
     },
+    getSportById(id) {
+        return api.get(`/api/sports/${id}`);
+    },
 
 };

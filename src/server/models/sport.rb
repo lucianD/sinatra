@@ -1,5 +1,5 @@
 # Will hold the sports data
-class Sports
+class Sport
   attr_accessor :id, :desc, :pos
 
   def initialize(id, desc, pos)

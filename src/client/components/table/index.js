@@ -6,8 +6,9 @@ function TableComponent({columns, data, onClickHandler}) {
         const tableHeaders = (
             <thead className='thead-dark'>
                 <tr>
-                    {columns.map(function(column) {
-                        return <th key={column}>{column}</th>; })}
+                    {columns.map(column => (
+                        <th key={column}>{column}</th>
+                    ))}
                 </tr>
             </thead>);
 
@@ -15,8 +16,9 @@ function TableComponent({columns, data, onClickHandler}) {
             return (
                 <tbody key={row.id}>
                     <tr onClick={onClickHandler.bind(this, row.id)}>
-                        {columns.map(function(column) {
-                            return <td key={row[column]}>{row[column]}</td>; })}
+                        {columns.map(column => (
+                            <td key={row[column]}>{row[column]}</td>))
+                        }
                     </tr>
                 </tbody>); });
 
