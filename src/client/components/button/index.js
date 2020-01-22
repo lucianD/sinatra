@@ -1,8 +1,8 @@
 import React, { memo } from 'react';
 import PropTypes from 'prop-types';
 
-function Button({ label, disabled, onClick, ...props }) {
-    const buttonClass = 'button';
+function Button({ label, disabled, onClick, className, ...props }) {
+    const buttonClass = `${className || ''} button btn-primary`;
 
     return (
         <button className={buttonClass} disabled={disabled} onClick={onClick} {...props}>
