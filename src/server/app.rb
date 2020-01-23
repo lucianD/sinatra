@@ -1,53 +1,69 @@
-require 'sinatra'
+require 'sinatra/base'
 require './services/sport'
-require './helper/array_pos'
-require './helper/json_reader'
+require './helper/array_sorted_by_pos'
+require './helper/error_handler'
 
-set :port, 8080
-set :static, true
-set :public_folder, "static"
-set :views, "views"
+class ApplicationController < Sinatra::Base
+    # in memory cached object
+    @@sportsArray = nil
 
-get '/' do
-  'Hello world!'
-end
-
-# reading the json
-data_hash = JsonReader.fetch()
-
-# in memory object
-sportsArray = nil
-
-## gets all the sports sorted by pos
-get '/api/sports' do
-    headers 'Access-Control-Allow-Origin' => 'http://localhost:3000'
-    begin
-        if sportsArray
-            # if the object is already defined it means it has been already loaded
-            JSON sportsArray.arr
-        else
-            # else it means this is the first request and we need to parse the json
-            sportsArray = SportService.parseSimpleSportsList(data_hash)
-        end
-    rescue
-        status 400
-        error = { 'error' => 'Something bad happened' }
-        JSON error
-    else
-        JSON sportsArray.arr
-    end
-end
-
-get '/api/sports/:id' do |id|
-    begin
+    before do
         headers 'Access-Control-Allow-Origin' => 'http://localhost:3000'
-        events = SportService.parseSportById(data_hash, id)
-        JSON events.arr
-    rescue
-        status 400
-        error = { 'error' => 'Something bad happened' }
-        JSON error
-    else
-        JSON events.arr
+    end
+
+    get '/api/sports' do
+      begin
+          if @@sportsArray
+              # if the object is already defined it means it has been already loaded
+              JSON @@sportsArray.arr
+          else
+              # else it means this is the first request and we need to parse the json
+              @@sportsArray = SportService.parseSimpleSportsList()
+          end
+          JSON @@sportsArray.arr
+      rescue StandardError => e
+          status 400
+          response = ErrorHandler.handle(e, '/api/sports')
+          JSON response
+      end
+    end
+
+    # gets a list of events for a sport
+    get '/api/sports/:id' do |id|
+      begin
+          events = SportService.parseSportById(id)
+          JSON events.arr
+      rescue StandardError => e
+          status 400
+          response = ErrorHandler.handle(e, "/api/sports/#{@sport_id}")
+          JSON response
+      end
+    end
+
+    # gets the outcomes of a particular event
+    get '/api/sports/:sport_id/events/:event_id' do |sport_id, event_id|
+      begin
+#       TODO implement the service method for this
+          events = SportService.parseSportById(sport_id)
+          JSON events.arr
+      rescue StandardError => e
+          status 400
+          response = ErrorHandler.handle(e, "/api/sports/#{@sport_id}/event/#{@event_id}")
+          JSON response
+      end
+    end
+
+    # 500 handler
+    error StandardError do
+        status 500
+        content_type :json
+        return '{"error": "Internal server error", "code": 500}'
+    end
+
+    not_found do
+        status 404
+        content_type :json
+        return '{"error": "Page not found", "code": 404}'
     end
 end
+## gets all the sports sorted by pos

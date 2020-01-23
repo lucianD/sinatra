@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import HomePage from './pages/home';
-import SportPage from './pages/sport';
+import SportPage from './pages/events';
 
 /**
  * Router component

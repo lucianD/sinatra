@@ -1,5 +1,5 @@
 # this class is used in order to efficiently keep an array sorted by the pos value
-class ArrayPos
+class ArraySortedByPos
   attr_accessor :arr
 
   def initialize()

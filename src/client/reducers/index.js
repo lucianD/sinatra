@@ -1,9 +1,11 @@
 import { combineReducers } from 'redux';
 
-import data from './data';
+import sports from './sports';
+import events from './events';
 
 const reducer = combineReducers({
-    data
+    sports,
+    events
 });
 
 export default reducer;

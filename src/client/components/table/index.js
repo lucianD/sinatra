@@ -15,7 +15,7 @@ function TableComponent({columns, data, onClickHandler}) {
         const tableBody = data.map(function(row) {
             return (
                 <tbody key={row.id}>
-                    <tr onClick={onClickHandler.bind(this, row.id)}>
+                    <tr onClick={onClickHandler.bind(this, row)}>
                         {columns.map(column => (
                             <td key={row[column]}>{row[column]}</td>))
                         }
