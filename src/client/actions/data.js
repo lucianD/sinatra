@@ -76,3 +76,29 @@ export const loadSportById = id => async dispatch => {
         });
     }
 };
+
+export const getEventOutcomeById = id => async dispatch => {
+    try {
+        const response = await DataApi.getEventOutcomeById(id);
+        const body = response.body;
+
+        if (response.status === 200) {
+            dispatch({
+                type: DATA_ACTIONS.SET_SPORT_DATA,
+                data: body,
+            })
+
+        } else {
+            dispatch({
+                type: DATA_ACTIONS.SET_ERRORS,
+                errors: body.errors,
+            });
+        }
+    } catch (errors) {
+        dispatch({
+            type: DATA_ACTIONS.SET_ERRORS,
+            errors,
+        });
+    }
+};
+

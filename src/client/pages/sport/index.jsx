@@ -30,7 +30,7 @@ function SportPage( {history}) {
                 columns={['id', 'desc', 'comp_desc']}
                 data={selectedSportData}
                 onClickHandler={selectedSport => {
-                    dispatch(setSport(selectedSport));
+                    // dispatch(setSport(selectedSport));
                     history.push('/view-sport');
                 }}
             />

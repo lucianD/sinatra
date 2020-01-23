@@ -1,9 +1,10 @@
 require './helper/array_pos'
 require './models/event'
+require './models/sport'
 
 # Will hold data manipulation regarding the sports
 class SportService
-
+  # method gets the json dump and returns a sorted array by pos of Sport objects
   def self.parseSimpleSportsList(data)
     sportsArray = ArrayPos.new
     data['sports'].each do |current|
@@ -12,11 +13,10 @@ class SportService
     end
     sportsArray
   end
-
+  # method gets the json dump and an id returns a sorted array by pos of Event objects
   def self.parseSportById(data, id)
     sportsArray = ArrayPos.new
     selectedSport = data['sports'].select { |sport| sport['id'].to_s == id.to_s }[0]
-#     puts selectedSport.inspect
     events = ArrayPos.new
     selectedSport['comp'].each do |comp|
       comp['events'].each do |event|
@@ -26,7 +26,7 @@ class SportService
     events
   end
 
-# implementing to_json in order to be able to send object to front-end as JSON
+  # implementing to_json in order to be able to send object to front-end as JSON
   def to_json
     {'id' => @id, 'desc' => @desc, 'pos' => @pos}
   end
