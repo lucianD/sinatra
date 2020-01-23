@@ -7,3 +7,7 @@ It has also a server side in ruby/sinatra
 **start the client:** `npm start`
 
 **start the server:** `npm run server`
+
+## DB
+
+** The actual data is read from a data.json file that should be placed in /server ** (doing this because I cannot access the API url from my location)
