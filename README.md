@@ -2,7 +2,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 It has also a server side in ruby/sinatra
 
-## Instalatin
+## Installation
 go to root directory and run `npm install` 
  
 ## Running scripts
