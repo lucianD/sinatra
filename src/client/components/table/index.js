@@ -1,30 +1,33 @@
-import React, { memo } from 'react';
+import React, {memo} from 'react';
 import './index.scss'
 
-function TableComponent({columns, data, onClickHandler}) {
+function TableComponent({columns, data, onClickHandler = () => {}}) {
 
-        const tableHeaders = (
-            <thead className='thead-dark'>
-                <tr>
-                    {columns.map(column => (
-                        <th key={column}>{column}</th>
-                    ))}
-                </tr>
-            </thead>);
+    const tableHeaders = (
+        <thead className='thead-dark'>
+        <tr>
+            {columns.map(column => (
+                <th key={column}>{column}</th>
+            ))}
+        </tr>
+        </thead>);
 
-        const tableBody = data.map(function(row) {
-            return (
-                <tbody key={row.id}>
-                    <tr onClick={onClickHandler.bind(this, row)}>
-                        {columns.map(column => (
-                            <td key={row[column]}>{row[column]}</td>))
-                        }
-                    </tr>
-                </tbody>); });
+    const tableData = data.map(row => (
+            <tr key={row.id}
+                onClick={onClickHandler.bind(this, row)}>
+                {columns.map(column => (
+                    <td key={row[column]}>{row[column]}</td>))
+                }
+            </tr>
+        )
+    );
+    const tableBody = <tbody>{tableData}</tbody>;
 
-        // Decorate with Bootstrap CSS
-        return (
-            <table className='table table-bordered table-hover' width="100%">
+
+
+    // Decorate with Bootstrap CSS
+    return (
+        <table className='table table-bordered table-hover' width="100%">
             {tableHeaders}
             {tableBody}
 

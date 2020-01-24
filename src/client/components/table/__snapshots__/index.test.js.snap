@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders a table - snapshot test 1`] = `
+<table
+  className="table table-bordered table-hover"
+  width="100%"
+>
+  <thead
+    className="thead-dark"
+  >
+    <tr>
+      <th>
+        id
+      </th>
+      <th>
+        name
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr
+      onClick={[Function]}
+    >
+      <td>
+        1
+      </td>
+      <td>
+        Football
+      </td>
+    </tr>
+    <tr
+      onClick={[Function]}
+    >
+      <td>
+        2
+      </td>
+      <td>
+        Cricket
+      </td>
+    </tr>
+    <tr
+      onClick={[Function]}
+    >
+      <td>
+        3
+      </td>
+      <td>
+        Tennis
+      </td>
+    </tr>
+  </tbody>
+</table>
+`;
