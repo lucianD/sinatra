@@ -10,10 +10,16 @@ export const SPORTS_ACTIONS = {
 };
 
 
-export const setSport = selectedSport => ({
-    type: SPORTS_ACTIONS.SET_SPORT,
-    selectedSport
-});
+export const setSport = selectedSport => dispatch => {
+    dispatch({
+        type: SPORTS_ACTIONS.SET_SPORT,
+        selectedSport
+    });
+    dispatch({
+        type: EVENTS_ACTIONS.SELECT_EVENT,
+        data: {}
+    })
+};
 
 export const loadAllSports = () => async dispatch => {
     dispatch({

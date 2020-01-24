@@ -8,7 +8,7 @@ class ApplicationController < Sinatra::Base
     @@sportsArray = nil
 
     before do
-        headers 'Access-Control-Allow-Origin' => 'http://localhost:3000'
+        headers 'Access-Control-Allow-Origin' => '*'
     end
 
     get '/api/sports' do
@@ -35,7 +35,7 @@ class ApplicationController < Sinatra::Base
           JSON events.arr
       rescue StandardError => e
           status 400
-          response = ErrorHandler.handle(e, "/api/sports/#{@sport_id}")
+          response = ErrorHandler.handle(e, "/api/sports/#{sport_id}")
           JSON response
       end
     end
@@ -44,11 +44,10 @@ class ApplicationController < Sinatra::Base
     get '/api/sports/:sport_id/events/:event_id' do |sport_id, event_id|
       begin
 #       TODO implement the service method for this
-          events = SportService.parseSportById(sport_id)
-          JSON events.arr
+          return SportService.getOutcomeForEvent(sport_id, event_id)
       rescue StandardError => e
           status 400
-          response = ErrorHandler.handle(e, "/api/sports/#{@sport_id}/event/#{@event_id}")
+          response = ErrorHandler.handle(e, "/api/sports/#{sport_id}/events/#{event_id}")
           JSON response
       end
     end

@@ -4,7 +4,7 @@ import {EVENTS_ACTIONS} from "../actions/events";
 
 const selectEventAction = (state, action) => ({
     ...state,
-    selectedEvent: action.selectedEvent,
+    selectedEvent: action.data,
 });
 const setEventsForSport = (state, action) => ({
     ...state,

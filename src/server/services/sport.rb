@@ -19,7 +19,6 @@ class SportService
 
   # method gets the json dump and an id returns a sorted array by pos of Event objects
   def self.parseSportById(id)
-    sportsArray = ArraySortedByPos.new
     # we need to pick the only sport of interest by id
     selectedSport = @@data_hash['sports'].select { |sport| sport['id'].to_s == id.to_s }[0]
     events = ArraySortedByPos.new
@@ -32,6 +31,23 @@ class SportService
     end
     events
   end
+
+   # method gets the json dump and an id returns a sorted array by pos of Event objects
+    def self.getOutcomeForEvent(sport_id, event_id)
+      # we need to pick the only sport of interest by id
+      selectedSport = @@data_hash['sports'].select { |sport| sport['id'].to_s == sport_id.to_s }[0]
+      event = nil
+      # we then iterate within the comp array
+      selectedSport.key?('comp') && selectedSport['comp'].each do |comp|
+        # we pick the desired event
+        event = comp.key?('events') && comp['events'].select { |event| event['id'].to_s == event_id.to_s }[0]
+        # if we fould it then break out the iteration
+        event && break
+      end
+      scoreboard = event && event.key?('scoreboard') && event['scoreboard']
+      result = scoreboard && { 'scrA' => scoreboard['scrA'], 'scrB' => scoreboard['scrB'] }
+      JSON result || {}
+    end
 
   # implementing to_json in order to be able to send object to front-end as JSON
   def to_json

@@ -5,7 +5,7 @@ import { withRouter } from 'react-router-dom';
 import './index.scss'
 import {loadSportById} from "../../actions/sports";
 import Table from "../../components/table";
-import {getEventOutcomeById, selectEvent} from "../../actions/events";
+import {getEventOutcomeById} from "../../actions/events";
 
 /**
  * Home page component
@@ -15,14 +15,22 @@ function EventsPage( {history}) {
     const dispatch = useDispatch();
     const selectedSport = useSelector(state => state.sports.selectedSport);
     const selectedEvents = useSelector(state => state.events.list);
+    const selectedEvent = useSelector(state => state.events.selectedEvent);
+    const [outcome, setOutcome] = useState({scrA: '', scrB: ''});
 
     useEffect(() => {
         if (!selectedSport.id) {
             history.push('/');
         } else {
-            dispatch(loadSportById(selectedSport.id))
+            dispatch(loadSportById(selectedSport.id));
         }
+        // eslint-disable-next-line
     }, []);
+
+    useEffect(() => {
+        setOutcome({scrA: selectedEvent.scrA, scrB: selectedEvent.scrB})
+        // eslint-disable-next-line
+    }, [selectedEvent]);
 
     const renderEventsTable = () => {
         return <div className='homepage__table-container'>
@@ -42,6 +50,7 @@ function EventsPage( {history}) {
     return (
         <div className='sport-page'>
             <div>These are {selectedSport.desc} matches </div>
+            <div>Outcome for clicked event: {outcome.scrA} - {outcome.scrB}</div>
             {selectedEvents && renderEventsTable()}
         </div>
     );
