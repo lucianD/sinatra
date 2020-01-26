@@ -1,5 +1,5 @@
-require './helper/array_sorted_by_pos'
-require './helper/json_reader'
+require './helpers/array_sorted_by_pos'
+require './helpers/json_reader'
 require './models/event'
 require './models/sport'
 

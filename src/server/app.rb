@@ -1,7 +1,7 @@
 require 'sinatra/base'
 require './services/sport'
-require './helper/array_sorted_by_pos'
-require './helper/error_handler'
+require './helpers/array_sorted_by_pos'
+require './helpers/error_handler'
 
 class ApplicationController < Sinatra::Base
     # in memory cached object
@@ -35,7 +35,7 @@ class ApplicationController < Sinatra::Base
           JSON events.arr
       rescue StandardError => e
           status 400
-          response = ErrorHandler.handle(e, "/api/sports/#{sport_id}")
+          response = ErrorHandler.handle(e, "/api/sports/#{id}")
           JSON response
       end
     end
