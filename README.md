@@ -9,13 +9,16 @@ go to root directory and run
 
 `bundle install --path vendor/bundle`
  
-## Running scripts
+## Running scripts 
+hint: you run all commands from root directory
 
 **start the client:** `npm start`
 
 **start the server:** `npm run server`
 
-**start the tests:** `npm run test`
+**start front-end tests:** `npm run test`
+
+**start back-end tests:** `npm run test-server`
 
 ## DB
 
