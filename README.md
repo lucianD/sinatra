@@ -3,7 +3,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 It has also a server side in ruby/sinatra
 
 ## Installation
-go to root directory and run `npm install` 
+go to root directory and run 
+
+`npm install` 
+
+`bundle install --path vendor/bundle`
  
 ## Running scripts
 
